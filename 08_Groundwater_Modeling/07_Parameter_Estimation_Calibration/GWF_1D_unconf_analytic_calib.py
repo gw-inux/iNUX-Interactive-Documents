@@ -8,6 +8,7 @@ import streamlit as st
 # ToDo:
 #    - K log slider
 #    - account/warn for negative heads
+#    - option for specified head
 
 # Authors, institutions, and year
 year = 2025 
@@ -211,11 +212,11 @@ def computation():
 
     plt.ylim(hl*(1-y_scale/100),hr*(1+y_scale/100))
     plt.xlim(-50,L+50)
-    x_pos1 = 500
+    x_pos1 = 550
     x_pos2 = 2500
     y_pos1 = ((hr *(1+y_scale/100))-150)*0.9+150
-    plt.text(x_pos1, y_pos1, 'Defined head bc', horizontalalignment='right', bbox=dict(boxstyle="square", facecolor='lightgrey'), fontsize=12)
-    plt.text(x_pos2, y_pos1, 'Defined head bc', horizontalalignment='right', bbox=dict(boxstyle="square", facecolor='lightgrey'), fontsize=12)
+    plt.text(x_pos1, y_pos1, 'Specified head bc', horizontalalignment='right', bbox=dict(boxstyle="square", facecolor='deepskyblue', alpha=0.4), fontsize=12)
+    plt.text(x_pos2, y_pos1, 'Specified head bc', horizontalalignment='right', bbox=dict(boxstyle="square", facecolor='deepskyblue', alpha=0.4), fontsize=12)
     
     if scatter:
         x45 = [0,200]
