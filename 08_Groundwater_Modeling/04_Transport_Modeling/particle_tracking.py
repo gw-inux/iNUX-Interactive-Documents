@@ -43,7 +43,7 @@ with col2:
 
 with col3:
     with st.expander('Aquifer characteristics'):
-        D = st.slider('Average aquifer thickness  \n$b$ (m)',5,80,30,1)
+        D = st.slider('Average aquifer thickness  \n$b$ (m)',5,100,30,1)
         n0 = st.slider('Effective porosity  \n$n_0$ (%)',1,100,20,1)
 
 def calc_x(x0,q,t,D,n0):
@@ -62,17 +62,23 @@ d = calc_d(x0,q,t,D,n0)
 
 
 # create a plot
-fig,ax=plt.subplots(figsize=(8,5))
+fig,ax=plt.subplots(figsize=(8,10))
 
 plt.title('Particle Tracking Visualization', fontsize=16)
 plt.xlabel(r'x in m', fontsize=14)
-plt.ylabel(r'aquifer thickness in m', fontsize=14)
+plt.ylabel('aquifer thickness\nin m', fontsize=14)
     
 ax.spines[['bottom','right']].set_visible(False)
 ax.tick_params(top=True, labeltop=True, bottom=False, labelbottom=False)
-ax.set_ylim(-D/10,D)
+ax.set_ylim(-5,100)
 ax.set_xlim(0, 1000)
 ax.invert_yaxis()
+
+# --- Center y-label at a specific data y-position
+y_target = (D-5) / 2          # choose any data value (e.g. mid-aquifer)
+
+ax.yaxis.set_label_coords(-0.06, y_target)
+ax.get_yaxis().get_label().set_transform(ax.get_yaxis_transform())
 
 # Define y-ticks starting at 0
 yticks = np.arange(0, D + 1, 5)   # change step if needed
@@ -98,15 +104,15 @@ ax.vlines(x=0, ymin=0, ymax=D, color='black', linewidth=1.5)
 ax.plot(x,d)    # graph
 
 plt.axhspan(0,D,facecolor='deepskyblue', alpha=0.3)   # groundwater body
-tgl = [[100,0],[90, -D/25],[110, -D/25]] # water triangle
+tgl = [[100,0],[90, -2],[110, -2]] # water triangle
 ax.add_patch(Polygon(tgl))
 ax.hlines(0, 90, 110) #(y,x1,x2)
-ax.hlines(D/100, 95, 105)
-ax.hlines(D/50, 98, 102)
+ax.hlines(0.5, 95, 105)
+ax.hlines(1, 98, 102)
 
 ax.plot(x[t_set], d[t_set], color='deeppink',marker='o')   # marker for specific t
-ax.axhline(d[t_set], linestyle=':', c='grey')
-ax.axvline(x[t_set], linestyle=':', c='grey')
+ax.hlines(d[t_set],xmin=0, xmax = x[t_set],  linestyle=':', colors='grey')
+ax.vlines(x[t_set],ymin=d[t_set], ymax=D, linestyle=':', colors='grey')
 
 red_dot = mlines.Line2D([],[],color='deeppink',marker='o',linestyle='', markersize=7,     # legent for the marker
                             label=f't={t_set} [years], z={d[t_set]:.2f} [m], x={x[t_set]:.2f} [m]')
