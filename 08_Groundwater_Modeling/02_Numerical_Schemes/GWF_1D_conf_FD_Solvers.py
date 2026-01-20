@@ -136,7 +136,7 @@ if st.session_state.scheme == "SOR":
     scheme_txt = rf'Scheme = SOR ($\omega$ = {st.session_state.omega:.2f})'
 else:
     scheme_txt = rf'Scheme = {st.session_state.scheme}'
-props   = dict(boxstyle='round', facecolor='wheat', alpha=0.5)
+props   = dict(boxstyle='round', facecolor='palegreen', alpha=0.5)
 out_txt = '\n'.join((
                          scheme_txt,
                          r'$i = %i$' % (i, ),
@@ -211,7 +211,7 @@ def computation():
             else:
                 scheme_txt = rf'Scheme = {st.session_state.scheme}'
                 
-            props   = dict(boxstyle='round', facecolor='wheat', alpha=0.5)
+            props   = dict(boxstyle='round', facecolor='palegreen', alpha=0.5)
             out_txt = '\n'.join((
                                      scheme_txt,
                                      r'$i = %i$' % (i, ),
