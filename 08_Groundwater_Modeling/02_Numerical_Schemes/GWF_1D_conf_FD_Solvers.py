@@ -144,7 +144,7 @@ out_txt = '\n'.join((
                          scheme_txt,
                          r'$i = %i$' % (i, ),
                          r'$i_{max} = %i$' % (st.session_state.i_max, ),
-                         r'$eps = %.4f$' % (st.session_state.epsilon, )))   
+                         r'$eps = %.6f$' % (st.session_state.epsilon, )))   
 fig = plt.figure(figsize=(10,7))
 ax1 = fig.add_subplot(1, 1, 1)
 ax1.xaxis.set_major_locator(MaxNLocator(integer=True))
@@ -224,7 +224,7 @@ def computation():
                                      scheme_txt,
                                      r'$i = %i$' % (i, ),
                                      r'$i_{max} = %i$' % (st.session_state.i_max, ),
-                                     r'$dh_{max} = %.4f$' % (max_head_change, )))   
+                                     r'$dh_{max} = %.6f$' % (max_head_change, )))   
             fig = plt.figure(figsize=(10,7))
             ax1 = fig.add_subplot(1, 1, 1)
             ax1.xaxis.set_major_locator(MaxNLocator(integer=True))
