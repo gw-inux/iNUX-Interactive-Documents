@@ -117,6 +117,7 @@ RA = RCH_IN/1000/24/3600/365.25
 h[0]  = BC_L
 h[-1] = BC_R
 st.session_state.h_old = h.copy()
+st.session_state.h_ini = h.copy()
         
 # Maximaler / Minimaler Anfangswasserstand für Skalierung der Abbildung
 h_max = max(h)
@@ -174,7 +175,11 @@ def computation():
     
     i = 0
     convergence = False
+
     if run:
+        h = st.session_state.h_ini.copy()
+        st.session_state.h_old = h.copy()
+        
         while i < st.session_state.i_max:
             # Increase iteration count
             i = i + 1       
