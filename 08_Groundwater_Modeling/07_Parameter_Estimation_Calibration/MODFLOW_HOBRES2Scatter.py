@@ -345,16 +345,15 @@ uploaded = st.file_uploader(
     accept_multiple_files=False,
 )
 
+if not uploaded:
+    st.info("Please upload a `*.hob_out` file to start.")
+    st.stop()
+    
 default_title = "Scatterplot for "
 if uploaded is not None and hasattr(uploaded, "name"):
     default_title = f"Scatterplot for {uploaded.name}"
 
 title = st.text_input("**Plot title** _(modify if required)_", value=default_title)
-
-
-if not uploaded:
-    st.info("Please upload a `*.hob_out` file to start.")
-    st.stop()
 
 try:
     # --- Detect file type by extension
