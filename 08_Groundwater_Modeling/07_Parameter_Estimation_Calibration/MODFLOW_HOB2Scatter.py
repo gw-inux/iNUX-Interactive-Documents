@@ -199,9 +199,12 @@ and produces a scatter plot colored by residual.
 )
 
 st.header("Plot settings")
-title = st.text_input("Plot title", value="HOB scatter")
-#vmin = st.number_input("Residual color scale min (m)", value=-3.0, step=0.5)
-#vmax = st.number_input("Residual color scale max (m)", value=3.0, step=0.5)
+
+default_title = "Scatterplot for "
+if uploaded is not None and hasattr(uploaded, "name"):
+    default_title = f"Scatterplot for {uploaded.name}"
+
+title = st.text_input("Plot title", value=default_title)
 
 uploaded = st.file_uploader(
     "Upload MODFLOW HOB output (*.hob_out)",
