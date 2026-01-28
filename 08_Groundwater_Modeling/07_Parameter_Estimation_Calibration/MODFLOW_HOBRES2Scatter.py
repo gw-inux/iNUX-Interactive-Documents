@@ -323,7 +323,8 @@ def compute_statistics(measured, computed):
 # Streamlit App
 # -----------------------------
 st.set_page_config(page_title="HOB RES Scatter")
-st.title("MODFLOW HOB RES Scatter Plot (Observed vs Simulated)")
+st.title("MODFLOW Postprocessing")
+st.subheader("Generate a Scatter Plot from *.hob_out (HOB) / *.res (PEST) Data", divider = 'green')
 
 st.markdown("""
 This tool allows post-processing of calibration results from a MODFLOW simulation.
