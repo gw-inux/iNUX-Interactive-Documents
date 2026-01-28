@@ -346,7 +346,7 @@ uploaded = st.file_uploader(
 )
 
 if not uploaded:
-    st.info("Please upload a `*.hob_out` file to start.")
+    st.info("Please upload a `*.hob_out` or `*.res` file to start.")
     st.stop()
     
 default_title = "Scatterplot for "
