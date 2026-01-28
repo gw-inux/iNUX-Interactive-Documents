@@ -220,7 +220,7 @@ if not uploaded:
 
 try:
     df_raw = read_hob_out(uploaded)
-    df_all, df_fil, rmse = process_hob_df(df_raw)
+    df_all, df_fil = process_hob_df(df_raw)
 
     # Quick stats
     residuals = df_fil["Residual"].astype(float)
