@@ -78,7 +78,7 @@ def process_hob_df(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, float]
 
     return df, df_fil
 
-def make_scatter_figure(df_fil: pd.DataFrame, title: str):
+def make_scatter_figure(df_fil: pd.DataFrame, title: str, me: float, mae: float, rmse: float):
     fig = plt.figure(figsize=(8, 7))
     
     data_min_raw = min(
@@ -105,11 +105,6 @@ def make_scatter_figure(df_fil: pd.DataFrame, title: str):
     # Determine symmetric color scale based on residuals
     max_abs_res = np.max(np.abs(df_fil["Residual"].values))
     cbar_lim = np.ceil(max_abs_res)
-
-    # --- Calibration statistics textbox (ME / MAE / RMSE)
-    measured = df_fil["Observed Head"].values
-    computed = df_fil["Simulated Head"].values
-    me, mae, rmse = compute_statistics(measured, computed)
 
     out_txt = "\n".join((
         rf"$ME = {me:.3f}$ m",
@@ -221,22 +216,12 @@ if not uploaded:
 try:
     df_raw = read_hob_out(uploaded)
     df_all, df_fil = process_hob_df(df_raw)
+    
+    me, mae, rmse = compute_statistics(df_fil["Observed Head"].values, df_fil["Simulated Head"].values)
 
     # Quick stats
     residuals = df_fil["Residual"].astype(float)
-    stats = pd.DataFrame(
-        {
-            "N (filtered)": [len(df_fil)],
-            "RMSE (m)": [rmse],
-            "Mean residual (m)": [round(residuals.mean(), 3)],
-            "Median residual (m)": [round(residuals.median(), 3)],
-            "Std residual (m)": [round(residuals.std(ddof=1), 3) if len(residuals) > 1 else np.nan],
-            "Min residual (m)": [round(residuals.min(), 3)],
-            "Max residual (m)": [round(residuals.max(), 3)],
-        }
-    )
-
-    fig = make_scatter_figure(df_fil, title=title)
+    fig = make_scatter_figure(df_fil, title=title, me=me, mae=mae, rmse=rmse)
     st.pyplot(fig, clear_figure=False)
     
     png_bytes = fig_to_png_bytes(fig)
