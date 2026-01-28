@@ -210,7 +210,7 @@ default_title = "Scatterplot for "
 if uploaded is not None and hasattr(uploaded, "name"):
     default_title = f"Scatterplot for {uploaded.name}"
 
-title = st.text_input("Plot title", value=default_title)
+title = st.text_input("**Plot title** _(modify if required)_", value=default_title)
 
 
 if not uploaded:
