@@ -340,7 +340,7 @@ The resulting scatter plot can be saved and downloaded for further analysis or d
 st.header("Plot settings")
 
 uploaded = st.file_uploader(
-    "Upload MODFLOW HOB output (*.hob_out) or residual file (*.res)",
+    "Upload MODFLOW HOB output (`*.hob_out`) or residual file (`*.res`)",
     type=["hob_out", "res", "out", "txt", "dat", "csv"],
     accept_multiple_files=False,
 )
