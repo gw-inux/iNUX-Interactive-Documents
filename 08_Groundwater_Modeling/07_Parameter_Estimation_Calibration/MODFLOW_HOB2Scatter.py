@@ -76,11 +76,7 @@ def process_hob_df(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, float]
     # Filter dry simulated heads
     df_fil = df[df["Simulated Head"] > -10000].copy()
 
-    # RMSE computed on filtered data
-    rmse = sqrt(mean_squared_error(df_fil["Observed Head"].values, df_fil["Simulated Head"].values))
-    rmse = round(rmse, 3)
-
-    return df, df_fil, rmse
+    return df, df_fil
 
 def make_scatter_figure(df_fil: pd.DataFrame, title: str):
     fig = plt.figure(figsize=(8, 7))
