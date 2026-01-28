@@ -6,7 +6,6 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import streamlit as st
-from sklearn.metrics import mean_squared_error
 
 
 RENAME_MAP = {
