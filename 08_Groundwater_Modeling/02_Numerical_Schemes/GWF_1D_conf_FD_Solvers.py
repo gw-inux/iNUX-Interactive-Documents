@@ -49,8 +49,28 @@ with cc0:
 with st.expander(":green[**Click here**] to read more about the different solution schemes"):
     st.markdown("""
     #### Jacobi iteration
+    
+    All cells are updated using only values from the previous iteration (*old*). This makes the method simple and robust, but convergence is typically slow.
+    
+    $$
+    h_i = \\frac{h_{i-1}^{old} + h_{i+1}^{old}}{2}  + \\frac{R_i}{2T}\Delta x^2
+    $$
+
     #### Gauss-Seidel iteration
+    Updated values are used immediately within the same iteration (left neighbor updated, right still *old*). This accelerates convergence compared to Jacobi.
+
+    $$
+    h_i = \\frac{h_{i-1} + h_{i+1}^{old}}{2}  + \\frac{R_i}{2T}\Delta x^2
+    $$    
+    
+    
     #### Successive Over-Relaxation (SOR) iteration
+    The Gauss–Seidel update is relaxed using a factor $\omega$, combining the previous value with the new estimate.
+    
+    $$
+    h_i = (1-\omega)h_i^{old} + \omega (\\frac{h_{i-1} + h_{i+1}^{old}}{2}  + \\frac{R_i}{2T}\Delta x^2)
+    $$
+    
     """)
 
 st.subheader('Input values', divider = 'green')
